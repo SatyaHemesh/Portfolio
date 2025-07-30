@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routhu Satya Hemesh | Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Define CSS variables for dynamic colors */
+        :root {
+            --accent-hue: 180; /* Initial cyan hue */
+            --accent-saturation: 80%;
+            --accent-lightness: 40%;
+            --accent-lightness-hover: 30%;
+            --accent-border-lightness: 50%;
+        }
+
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #f9fafb; /* text-gray-50 */
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* --- UPDATED: Section Title Styling --- */
+        .section-title {
+            font-size: 30px; /* You can change this to 30px or 32px as needed */
+            font-weight: 600; /* Slightly bold but not heavy */
+            text-align: center;
+            margin-bottom: 2rem;
+            letter-spacing: 0.03em;
+            color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+            font-family: 'Nunito', sans-serif;
+            text-shadow: 0 0 6px hsla(var(--accent-hue), var(--accent-saturation), var(--accent-lightness), 0.2);
+        }
+
+
+        /* Style for the typewriter cursor */
+        #typewriter::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #f9fafb; }
+        }
+        
+        /* Hide default file input */
+        #imageUpload {
+            display: none;
+        }
+
+        /* Innovative Hero Section Background */
+        .hero-background {
+            background: radial-gradient(circle at center, #2c3e50 0%, #111827 70%);
+            background-size: 200% 200%;
+            animation: gradient-animation 15s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* Dynamic accent colors for buttons and borders */
+        .dynamic-accent-bg {
+            background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+        }
+        .dynamic-accent-bg:hover {
+            background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness-hover));
+        }
+        .dynamic-accent-border {
+            border-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-border-lightness));
+        }
+        .dynamic-accent-text {
+            color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center glass-effect rounded-full px-6 py-3">
+                <a href="#" class="text-xl font-bold">Routhu Satya Hemesh</a>
+                <nav class="hidden md:flex space-x-6 items-center">
+                    <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#education" class="hover:text-cyan-400 transition-colors">Education</a>
+                    <a href="#activities" class="hover:text-cyan-400 transition-colors">Activities</a>
+                    <a href="#contact" class="dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors">Contact</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-95 z-40">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+            <a href="#about" class="mobile-menu-link">About</a>
+            <a href="#projects" class="mobile-menu-link">Projects</a>
+            <a href="#skills" class="mobile-menu-link">Skills</a>
+            <a href="#education" class="mobile-menu-link">Education</a>
+            <a href="#activities" class="mobile-menu-link">Activities</a>
+            <a href="#contact" class="mobile-menu-link">Contact</a>
+            <button id="mobile-menu-close" class="absolute top-8 right-8">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center hero-background relative overflow-hidden">
+            <div class="absolute inset-0 z-0 flex items-center justify-center">
+                <div class="relative w-full h-full flex items-center justify-center">
+                    <img src="IMG_20230327_224038.jpg" alt="Routhu Satya Hemesh Background" class="absolute inset-0 w-full h-full object-cover opacity-30" style="object-position: 70% 22%;"> 
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <img id="profileImage" src="IMG_20230327_224038.jpg" alt="Routhu Satya Hemesh" class="w-40 h-40 rounded-full mx-auto mb-4 border-4 dynamic-accent-border shadow-lg object-cover">
+                
+                                <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm Routhu Satya Hemesh</h1>
+                <p id="typewriter" class="text-xl md:text-2xl text-gray-300 mb-8 h-8"></p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-12">
+                    <a href="#projects" class="dynamic-accent-bg text-white font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 w-full sm:w-auto">View My Work</a>
+                    <a href="Routhu%20Satya%20Hemesh.pdf" download class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 w-full sm:w-auto flex items-center justify-center">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                        Download Resume
+                    </a>
+                    <a href="Cover_Letter.pdf" download="Cover_Letter.pdf" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 w-full sm:w-auto flex items-center justify-center mt-4 sm:mt-0">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                        Download Cover Letter
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 md:py-32">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title">About Me</h2>
+                <div class="max-w-3xl mx-auto text-center text-gray-300 text-lg leading-relaxed">
+                    <p>
+                        I am a passionate Computer Science and Engineering student at ACE Engineering College. I enjoy developing real-world applications and constantly improving my skills in Java, C, JavaScript, MySQL, and modern web technologies.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 md:py-32 bg-gray-800/50">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title">My Projects</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=QR+Generator" alt="QR Code Generator" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">QR Code Generator & Scanner</h3>
+                            <p class="text-gray-400 mb-4">Offline web app using HTML, JS, Blob & Canvas APIs, with image upload for scanning and generation.</p>
+                            <a href="qr-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Grade+Tracker" alt="Student Grade Tracker" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Student Grade Tracker</h3>
+                            <p class="text-gray-400 mb-4">Java-based console app for student grade management.</p>
+                            <a href="grade-tracker-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Stock+Trading" alt="Stock Trading Platform" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Stock Trading Platform</h3>
+                            <p class="text-gray-400 mb-4">Java app for simulated trading with file-based storage.</p>
+                            <a href="stock-trading-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Hotel+System" alt="Hotel Reservation System" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Hotel Reservation System</h3>
+                            <p class="text-gray-400 mb-4">Console system for hotel bookings using OOP in Java.</p>
+                            <a href="hotel-reservation-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=To-Do+App" alt="To-Do List Web App" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">To-Do List Web App</h3>
+                            <p class="text-gray-400 mb-4">Simple JS/HTML/CSS app with real-time task management.</p>
+                            <a href="todo-list-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Weather+App" alt="Weather App" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Weather App</h3>
+                            <p class="text-gray-400 mb-4">Uses Chart.js and live weather API to show analytics.</p>
+                            <a href="weather-app-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 md:py-32">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title">My Tech Stack</h2>
+                <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-8">
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="w-16 h-16" />
+                        <span class="font-medium">Java</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" class="w-16 h-16" />
+                        <span class="font-medium">C</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-16 h-16" />
+                        <span class="font-medium">JavaScript</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="w-16 h-16" />
+                        <span class="font-medium">HTML5</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="w-16 h-16" />
+                        <span class="font-medium">CSS3</span>
+                    </div>
+                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="w-16 h-16" />
+                        <span class="font-medium">MySQL</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="w-16 h-16" />
+                        <span class="font-medium">Git</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original-wordmark.svg" class="w-24 h-24" style="filter: invert(1);" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="education" class="py-20 md:py-32 bg-gray-800/50">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title">Education</h2>
+                <div class="max-w-3xl mx-auto space-y-8">
+                    <div class="glass-effect p-6 rounded-lg">
+                        <h3 class="text-xl font-bold">B.Tech, Computer Science & Engineering</h3>
+                        <p class="dynamic-accent-text font-medium">ACE Engineering College (2023 – 2027)</p>
+                        <p class="text-gray-400 mt-2">CGPA: 6.75</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg">
+                        <h3 class="text-xl font-bold">Intermediate (MPC)</h3>
+                        <p class="dynamic-accent-text font-medium">Sri Chaitanya Junior College (2021 – 2023)</p>
+                        <p class="text-gray-400 mt-2">Score: 781/1000</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg">
+                        <h3 class="text-xl font-bold">10th Class</h3>
+                        <p class="dynamic-accent-text font-medium">Narayana E-Techno School (2020 – 2021)</p>
+                        <p class="text-gray-400 mt-2">Score: 326/500</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="activities" class="py-20 md:py-32">
+            <div class="container mx-auto px-4">
+                <h2 class="section-title">Activities & Hobbies</h2>
+                <div class="max-w-3xl mx-auto text-center text-lg text-gray-300">
+                    <ul class="list-none space-y-2 mb-6">
+                        <li>Anchoring & Hosting College Events</li>
+                        <li>Smart India Hackathon 2024 Participant</li>
+                        <li>Presented at Vignan Vaibhav 2025 (DRDO)</li>
+                        <li>Code Pragnya 2024 Finalist</li>
+                    </ul>
+                    <p><strong class="dynamic-accent-text">Hobbies:</strong> Music, Badminton, Cooking, & Travelling</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 md:py-32 bg-gray-800/50">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">
+                    I'm open to new opportunities and collaborations. Feel free to reach out!
+                </p>
+                <div class="flex flex-col space-y-4 max-w-sm mx-auto mb-8 text-left">
+                    <a href="mailto:satyahemesh2006@gmail.com" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
+                        <i data-lucide="mail" class="w-6 h-6 mr-4 dynamic-accent-text"></i>
+                        <span>satyahemesh2006@gmail.com</span>
+                    </a>
+                    <a href="tel:+918919095579" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
+                        <i data-lucide="phone" class="w-6 h-6 mr-4 dynamic-accent-text"></i>
+                        <span>+91 89190 95579</span>
+                    </a>
+                     <a href="https://wa.me/918919095579" target="_blank" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
+                        <i data-lucide="message-circle" class="w-6 h-6 mr-4 dynamic-accent-text"></i>
+                        <span>WhatsApp: +91 89190 95579</span>
+                    </a>
+                     <div class="flex items-center glass-effect p-4 rounded-lg">
+                        <i data-lucide="map-pin" class="w-6 h-6 mr-4 dynamic-accent-text"></i>
+                        <span>Hyderabad, Telangana</span>
+                    </div>
+                </div>
+                <a href="mailto:satyahemesh2006@gmail.com" class="inline-block dynamic-accent-bg text-white font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105">
+                    Say Hello
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-8">
+        <div class="container mx-auto px-4 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://linkedin.com/in/satya-hemesh-3a1364291" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                <a href="https://github.com/SatyaHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="https://instagram.com/urstrulyhemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                <a href="https://x.com/urstrulyHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                <a href="https://wa.me/918919095579" target="_blank" class="hover:text-cyan-400 transition-colors" title="WhatsApp">
+                    <i data-lucide="message-circle" class="w-6 h-6"></i>
+                </a>
+            </div>
+            <p>&copy; 2025 Routhu Satya Hemesh. Designed with 💙</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.onscroll = () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-gray-900/80', 'backdrop-blur-sm', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-gray-900/80', 'backdrop-blur-sm', 'shadow-lg');
+            }
+        };
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+        
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Typewriter Effect
+        const typeWriterText = "| B.Tech CSE | Developer | Tech Enthusiast ";
+        const typewriterElement = document.getElementById("typewriter");
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < typeWriterText.length) {
+                typewriterElement.innerHTML += typeWriterText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 80);
+            }
+        }
+
+        // Function to update the theme colors dynamically
+        function updateThemeColors() {
+            const newHue = Math.floor(Math.random() * 360);
+            document.documentElement.style.setProperty('--accent-hue', newHue);
+        }
+
+        // Start the effect and set initial theme colors after the page loads
+        window.onload = function() {
+            typeWriter();
+            updateThemeColors();
+
+
+        };
+
+    </script>
+</body>
+</html>

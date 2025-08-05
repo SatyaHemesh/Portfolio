@@ -1,30 +1,32 @@
+---
 
 # 💼 Routhu Satya Hemesh | Portfolio Website
 
-This is my **personal portfolio website**, built to showcase my skills, projects, education, and contact information. The site features a modern and responsive design, smooth animations, and a clean user interface — fully built with **HTML**, **Tailwind CSS**, and **JavaScript**.
+Welcome to my **personal portfolio website**!  
+This site showcases my **skills, projects, education, and contact details**, all wrapped in a responsive and modern design. Built with **HTML**, **Tailwind CSS**, and **JavaScript**, it's designed to be clean, fast, and fully mobile-friendly.
 
-🚀 **Live Demo**: [https://satyahemesh.netlify.app](https://satyahemesh.netlify.app)
+🚀 **Live Site**: [satyahemesh.netlify.app](https://satyahemesh.netlify.app)
 
 ---
 
 ## 🧰 Tech Stack
 
-- 🌐 HTML5
-- 🎨 Tailwind CSS
-- ⚙️ JavaScript (Vanilla)
-- ☁️ Netlify (Deployment)
+- 🔹 HTML5  
+- 🔹 Tailwind CSS  
+- 🔹 JavaScript (Vanilla)  
+- 🔹 Netlify (Deployment)
 
 ---
 
 ## ✨ Features
 
-- Full-screen hero section with animated gradient background
-- Typewriter effect for dynamic role display
-- Smooth scrolling and scroll indicator
-- “Back to Top” button for easy navigation
-- Responsive layout for all screen sizes
-- Sections: Home, About, Projects, Skills, Education, Contact
-- External links to GitHub & social media
+- 📱 Responsive layout across all devices  
+- 🎨 Full-screen hero section with animated gradient background  
+- ⌨️ Typewriter effect to show dynamic roles  
+- 🧭 Smooth scrolling and scroll progress indicator  
+- ⬆️ Back to Top button  
+- 📌 Sections: Home, About, Skills, Projects, Education, Contact  
+- 🔗 Links to GitHub, LinkedIn, Email  
 
 ---
 
@@ -33,55 +35,51 @@ This is my **personal portfolio website**, built to showcase my skills, projects
 ```
 
 📦 portfolio/
-├── 📄 index.html
-├── 📄 about.html
-├── 📄 projects.html
-├── 📄 skills.html
-├── 📄 education.html
-├── 📄 contact.html
-├── 📄 style.css
-├── 📄 script.js
-└── 📁 assets/ (profile image, icons, etc.)
+├── index.html
+├── about.html
+├── projects.html
+├── skills.html
+├── education.html
+├── contact.html
+├── style.css
+├── script.js
+└── assets/ (images, icons, etc.)
 
 ````
 
 ---
 
-## 📷 Preview
+## 🛠️ Getting Started
 
-![Portfolio Preview](https://satyahemesh.netlify.app/assets/preview-image.png) <!-- (Optional: Replace with actual image path or delete this section) -->
+To view or modify this portfolio locally:
 
----
-
-## 📌 How to Use
-
-1. Clone the repository:
+1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/SatyaHemesh/portfolio.git
 ````
 
-2. Open `index.html` in your browser or run a local server.
-3. Customize content in each HTML file to suit your needs.
+2. **Open in browser**
+
+   * Open `index.html` in any web browser
+3. **Customize content**
+
+   * Modify text, images, and links in HTML files as needed
 
 ---
 
-## 📬 Contact
+## 📬 Contact Me
 
-Feel free to reach out if you'd like to collaborate or just say hi!
+I’d love to connect or collaborate!
 
-* 🌐 [satyahemesh.netlify.app](https://satyahemesh.netlify.app)
-* 📧 Email: [your-email@example.com](mailto:your-email@example.com)
-* 💼 [LinkedIn](https://linkedin.com/in/yourprofile)
-* 🛠️ [GitHub](https://github.com/yourusername)
-
----
-
-## 📝 License
-
-This project is licensed under the **MIT License** – feel free to use, modify, and distribute.
+* 📧 Email: [satyahemesh2006@gmail.com](mailto:satyahemesh2006@gmail.com)
+* 💼 LinkedIn: [linkedin.com/in/satya-hemesh-3a1364291](https://linkedin.com/in/satya-hemesh-3a1364291)
+* 💻 GitHub: [github.com/SatyaHemesh](https://github.com/SatyaHemesh)
 
 ---
 
+## 📃 License
 
-Let me know if you'd like me to fill in your **GitHub username**, **LinkedIn**, or **email**, and I’ll update it for you!
-```
+This project is open-source and available under the [MIT License](LICENSE).
+Feel free to use, modify, and share!
+
+---

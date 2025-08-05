@@ -6,6 +6,11 @@
     <title>Routhu Satya Hemesh | Portfolio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,11 +28,12 @@
             --accent-border-lightness: 50%;
         }
 
-        /* Custom styles */
+        /* Base styles for dark mode (default) */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #111827; /* bg-gray-900 */
             color: #f9fafb; /* text-gray-50 */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         .glass-effect {
             background: rgba(255, 255, 255, 0.05);
@@ -35,19 +41,108 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        /* --- LIGHT MODE SPECIFIC STYLES --- */
+        /* These rules override dark mode styles when the 'light' class is present */
+        html.light body {
+            background-color: #f3f4f6; /* A very light gray */
+            color: #1f2937; /* A dark gray for contrast */
+        }
+        html.light .glass-effect {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        /* Specific overrides for Tailwind classes used in dark mode */
+        html.light .bg-gray-900\/80 { background-color: rgba(255, 255, 255, 0.8); }
+        html.light .bg-gray-800\/50 { background-color: #e5e7eb; } /* bg-gray-200 for light mode */
+        html.light .bg-gray-800 { background-color: #d1d5db; }    /* bg-gray-300 for light mode */
+        html.light .bg-gray-700 { background-color: #9ca3af; }    /* bg-gray-400 for light mode */
+        html.light .text-gray-50 { color: #1f2937; } /* Ensures header text is dark */
+        html.light .text-gray-300 { color: #4b5563; } /* text-gray-600 for light mode */
+        html.light .text-gray-400 { color: #4b5563; } /* text-gray-600 for light mode */
+        html.light .hero-background {
+            background: radial-gradient(circle at center, #c3dafe 0%, #d1d5db 70%);
+        }
+        html.light #profileImage {
+            filter: grayscale(20%); /* subtle filter for light mode */
+        }
         
-        /* --- UPDATED: Section Title Styling --- */
+        /* Updated Section Title styles for dynamic colors */
         .section-title {
-            font-size: 30px; /* You can change this to 30px or 32px as needed */
-            font-weight: 600; /* Slightly bold but not heavy */
-            text-align: center;
-            margin-bottom: 2rem;
+            position: relative;
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 1rem; /* Reduced margin */
             letter-spacing: 0.03em;
-            color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
             font-family: 'Nunito', sans-serif;
-            text-shadow: 0 0 6px hsla(var(--accent-hue), var(--accent-saturation), var(--accent-lightness), 0.2);
+            
+            color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+            
+            display: inline-block;
+            
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
         }
 
+        .section-title:hover {
+            transform: scale(1.02);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            
+            background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-border-lightness));
+            
+            transition: width 0.3s ease-in-out;
+        }
+
+        .section-title:hover::after {
+            width: 100%;
+        }
+
+        /* Custom styles for the 'My Projects' heading */
+        .projects-title {
+            position: relative;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 1rem; /* Reduced margin */
+            letter-spacing: 0.03em;
+            font-family: 'Nunito', sans-serif;
+            
+            color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+            
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .projects-title:hover {
+            transform: scale(1.02);
+        }
+
+        .projects-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            
+            background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-border-lightness));
+            
+            transition: width 0.3s ease-in-out;
+        }
+
+        .projects-title:hover::after {
+            width: 100%;
+        }
 
         /* Style for the typewriter cursor */
         #typewriter::after {
@@ -59,11 +154,6 @@
             50% { border-color: #f9fafb; }
         }
         
-        /* Hide default file input */
-        #imageUpload {
-            display: none;
-        }
-
         /* Innovative Hero Section Background */
         .hero-background {
             background: radial-gradient(circle at center, #2c3e50 0%, #111827 70%);
@@ -90,6 +180,57 @@
         .dynamic-accent-text {
             color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
         }
+        
+        /* Custom styles for the toggle button */
+        #theme-toggle {
+            cursor: pointer;
+        }
+        
+        /* Modal-specific styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #1f2937; /* bg-gray-800 */
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #d1d5db; /* text-gray-400 */
+            transition: color 0.2s ease-in-out;
+        }
+        .close-button:hover {
+            color: #ef4444; /* text-red-500 */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        html.light .modal-content {
+            background-color: #d1d5db; /* bg-gray-300 */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -97,7 +238,7 @@
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center glass-effect rounded-full px-6 py-3">
-                <a href="#" class="text-xl font-bold">Routhu Satya Hemesh</a>
+                <a href="#" class="text-lg font-bold">Routhu Satya Hemesh</a>
                 <nav class="hidden md:flex space-x-6 items-center">
                     <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
                     <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
@@ -105,16 +246,24 @@
                     <a href="#education" class="hover:text-cyan-400 transition-colors">Education</a>
                     <a href="#activities" class="hover:text-cyan-400 transition-colors">Activities</a>
                     <a href="#contact" class="dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-700 transition-colors">
+                        <i id="theme-icon" data-lucide="moon" class="w-5 h-5 text-gray-50"></i>
+                    </button>
                 </nav>
-                <button id="mobile-menu-button" class="md:hidden">
-                    <i data-lucide="menu"></i>
-                </button>
+                <div class="flex items-center space-x-4 md:hidden">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-gray-700 transition-colors">
+                        <i id="theme-icon-mobile" data-lucide="moon" class="w-5 h-5"></i>
+                    </button>
+                    <button id="mobile-menu-button">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
     
     <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-95 z-40">
-        <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-lg">
             <a href="#about" class="mobile-menu-link">About</a>
             <a href="#projects" class="mobile-menu-link">Projects</a>
             <a href="#skills" class="mobile-menu-link">Skills</a>
@@ -128,6 +277,7 @@
     </div>
 
     <main>
+        <!-- Hero section -->
         <section id="hero" class="min-h-screen flex items-center justify-center text-center hero-background relative overflow-hidden">
             <div class="absolute inset-0 z-0 flex items-center justify-center">
                 <div class="relative w-full h-full flex items-center justify-center">
@@ -136,11 +286,11 @@
             </div>
 
             <div class="container mx-auto px-4 relative z-10">
-                <img id="profileImage" src="IMG_20230327_224038.jpg" alt="Routhu Satya Hemesh" class="w-40 h-40 rounded-full mx-auto mb-4 border-4 dynamic-accent-border shadow-lg object-cover">
+                <img id="profileImage" src="IMG_20230327_224038.jpg" alt="Routhu Satya Hemesh" class="w-40 h-40 rounded-full mx-auto mb-2 border-4 dynamic-accent-border shadow-lg object-cover">
                 
-                                <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm Routhu Satya Hemesh</h1>
-                <p id="typewriter" class="text-xl md:text-2xl text-gray-300 mb-8 h-8"></p>
-                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-12">
+                <h1 class="text-4xl md:text-6xl font-bold mb-2">Hi, I'm Routhu Satya Hemesh</h1>
+                <p id="typewriter" class="text-lg md:text-2xl text-gray-300 mb-6 h-8"></p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
                     <a href="#projects" class="dynamic-accent-bg text-white font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 w-full sm:w-auto">View My Work</a>
                     <a href="Routhu%20Satya%20Hemesh.pdf" download class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 w-full sm:w-auto flex items-center justify-center">
                         <i data-lucide="download" class="w-5 h-5 mr-2"></i>
@@ -154,8 +304,9 @@
             </div>
         </section>
 
-        <section id="about" class="py-20 md:py-32">
-            <div class="container mx-auto px-4">
+        <!-- About section -->
+        <section id="about" class="pt-12 pb-6 md:pt-16 md:pb-8">
+            <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">About Me</h2>
                 <div class="max-w-3xl mx-auto text-center text-gray-300 text-lg leading-relaxed">
                     <p>
@@ -165,118 +316,103 @@
             </div>
         </section>
 
-        <section id="projects" class="py-20 md:py-32 bg-gray-800/50">
-            <div class="container mx-auto px-4">
-                <h2 class="section-title">My Projects</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Projects section with hover effect -->
+        <section id="projects" class="pt-6 pb-12 md:pt-8 md:pb-16 bg-gray-800/50">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="projects-title">My Projects</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
                     
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=QR+Generator" alt="QR Code Generator" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">QR Code Generator & Scanner</h3>
-                            <p class="text-gray-400 mb-4">Offline web app using HTML, JS, Blob & Canvas APIs, with image upload for scanning and generation.</p>
-                            <a href="qr-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
-                        </div>
+                    <!-- QR Code Generator -->
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('qr-generator')">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=QR+Generator" alt="QR Code Generator" class="w-full h-36 object-cover">
                     </div>
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Grade+Tracker" alt="Student Grade Tracker" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Student Grade Tracker</h3>
-                            <p class="text-gray-400 mb-4">Java-based console app for student grade management.</p>
-                            <a href="grade-tracker-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
-                        </div>
+
+                    <!-- Student Grade Tracker -->
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('grade-tracker')">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Grade+Tracker" alt="Student Grade Tracker" class="w-full h-36 object-cover">
                     </div>
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Stock+Trading" alt="Stock Trading Platform" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Stock Trading Platform</h3>
-                            <p class="text-gray-400 mb-4">Java app for simulated trading with file-based storage.</p>
-                            <a href="stock-trading-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
-                        </div>
+                    
+                    <!-- Stock Trading Platform -->
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('stock-trading')">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Stock+Trading" alt="Stock Trading Platform" class="w-full h-36 object-cover">
                     </div>
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Hotel+System" alt="Hotel Reservation System" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Hotel Reservation System</h3>
-                            <p class="text-gray-400 mb-4">Console system for hotel bookings using OOP in Java.</p>
-                            <a href="hotel-reservation-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
-                        </div>
+                    
+                    <!-- Hotel Reservation System -->
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('hotel-reservation')">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Hotel+System" alt="Hotel Reservation System" class="w-full h-36 object-cover">
                     </div>
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=To-Do+App" alt="To-Do List Web App" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">To-Do List Web App</h3>
-                            <p class="text-gray-400 mb-4">Simple JS/HTML/CSS app with real-time task management.</p>
-                            <a href="todo-list-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
-                        </div>
+
+                    <!-- To-Do List Web App -->
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('todo-list')">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=To-Do+App" alt="To-Do List Web App" class="w-full h-36 object-cover">
                     </div>
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300">
-                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Weather+App" alt="Weather App" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Weather App</h3>
-                            <p class="text-gray-400 mb-4">Uses Chart.js and live weather API to show analytics.</p>
-                            <a href="weather-app-project.html" target="_blank" class="inline-block dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors mt-2">View Demo</a>
-                        </div>
+
+                    <!-- Weather App -->
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('weather-app')">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Weather+App" alt="Weather App" class="w-full h-36 object-cover">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="py-20 md:py-32">
-            <div class="container mx-auto px-4">
+        <!-- Skills section -->
+        <section id="skills" class="py-12 md:py-16">
+            <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">My Tech Stack</h2>
-                <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-8">
+                <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-6">
                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="w-16 h-16" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="w-12 h-12" />
                         <span class="font-medium">Java</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" class="w-16 h-16" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" class="w-12 h-12" />
                         <span class="font-medium">C</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-16 h-16" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-12 h-12" />
                         <span class="font-medium">JavaScript</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="w-16 h-16" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="w-12 h-12" />
                         <span class="font-medium">HTML5</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="w-16 h-16" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="w-12 h-12" />
                         <span class="font-medium">CSS3</span>
                     </div>
-                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="w-16 h-16" />
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="w-12 h-12" />
                         <span class="font-medium">MySQL</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="w-16 h-16" />
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="w-12 h-12" />
                         <span class="font-medium">Git</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original-wordmark.svg" class="w-24 h-24" style="filter: invert(1);" />
+                        <!-- GitHub logo now inverts correctly for dark mode only -->
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original-wordmark.svg" class="w-20 h-20 dark:invert" />
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="education" class="py-20 md:py-32 bg-gray-800/50">
-            <div class="container mx-auto px-4">
+        <!-- Education section -->
+        <section id="education" class="py-12 md:py-16 bg-gray-800/50">
+            <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">Education</h2>
-                <div class="max-w-3xl mx-auto space-y-8">
-                    <div class="glass-effect p-6 rounded-lg">
-                        <h3 class="text-xl font-bold">B.Tech, Computer Science & Engineering</h3>
+                <div class="max-w-3xl mx-auto space-y-2">
+                    <div class="glass-effect p-4 rounded-lg">
+                        <h3 class="text-lg font-bold">B.Tech, Computer Science & Engineering</h3>
                         <p class="dynamic-accent-text font-medium">ACE Engineering College (2023 – 2027)</p>
                         <p class="text-gray-400 mt-2">CGPA: 6.75</p>
                     </div>
-                    <div class="glass-effect p-6 rounded-lg">
-                        <h3 class="text-xl font-bold">Intermediate (MPC)</h3>
+                    <div class="glass-effect p-4 rounded-lg">
+                        <h3 class="text-lg font-bold">Intermediate (MPC)</h3>
                         <p class="dynamic-accent-text font-medium">Sri Chaitanya Junior College (2021 – 2023)</p>
                         <p class="text-gray-400 mt-2">Score: 781/1000</p>
                     </div>
-                    <div class="glass-effect p-6 rounded-lg">
-                        <h3 class="text-xl font-bold">10th Class</h3>
+                    <div class="glass-effect p-4 rounded-lg">
+                        <h3 class="text-lg font-bold">10th Class</h3>
                         <p class="dynamic-accent-text font-medium">Narayana E-Techno School (2020 – 2021)</p>
                         <p class="text-gray-400 mt-2">Score: 326/500</p>
                     </div>
@@ -284,42 +420,109 @@
             </div>
         </section>
 
-        <section id="activities" class="py-20 md:py-32">
-            <div class="container mx-auto px-4">
+        <!-- Activities & Hobbies section -->
+        <section id="activities" class="py-12 md:py-16">
+            <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">Activities & Hobbies</h2>
-                <div class="max-w-3xl mx-auto text-center text-lg text-gray-300">
-                    <ul class="list-none space-y-2 mb-6">
-                        <li>Anchoring & Hosting College Events</li>
-                        <li>Smart India Hackathon 2024 Participant</li>
-                        <li>Presented at Vignan Vaibhav 2025 (DRDO)</li>
-                        <li>Code Pragnya 2024 Finalist</li>
-                    </ul>
-                    <p><strong class="dynamic-accent-text">Hobbies:</strong> Music, Badminton, Cooking, & Travelling</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                    <!-- Activities Card -->
+                    <div class="glass-effect p-6 rounded-lg shadow-lg flex flex-col items-center text-left">
+                        <i data-lucide="award" class="w-12 h-12 mb-4 dynamic-accent-text"></i>
+                        <h3 class="text-xl font-bold mb-4">My Activities</h3>
+                        <ul class="list-none space-y-4 w-full">
+                            <li class="flex items-start">
+                                <i data-lucide="mic" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Anchoring & Hosting</h4>
+                                    <p class="text-gray-400 text-sm">Successfully hosted and anchored various college events, improving public speaking and stage presence.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="laptop" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Smart India Hackathon 2024</h4>
+                                    <p class="text-gray-400 text-sm">Participated in a national-level hackathon, collaborating with a team to build a technical solution for a real-world problem.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="presentation" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Vignan Vaibhav 2025</h4>
+                                    <p class="text-gray-400 text-sm">Presented a research paper on a technical topic at this prestigious event sponsored by DRDO.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="medal" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Code Pragnya 2024 Finalist</h4>
+                                    <p class="text-gray-400 text-sm">Reached the final round of a competitive coding challenge, demonstrating strong problem-solving skills.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Hobbies Card -->
+                    <div class="glass-effect p-6 rounded-lg shadow-lg flex flex-col items-center text-left">
+                        <i data-lucide="heart" class="w-12 h-12 mb-4 dynamic-accent-text"></i>
+                        <h3 class="text-xl font-bold mb-4">My Hobbies</h3>
+                        <ul class="list-none space-y-4 w-full">
+                            <li class="flex items-start">
+                                <i data-lucide="music" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Music</h4>
+                                    <p class="text-gray-400 text-sm">Enjoy listening to and discovering new music from various genres to relax and get inspired.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="trophy" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Badminton</h4>
+                                    <p class="text-gray-400 text-sm">A passionate player, I enjoy the competitive spirit and physical activity of the sport.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="chef-hat" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Cooking</h4>
+                                    <p class="text-gray-400 text-sm">Love experimenting with new recipes and cooking for friends and family.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="plane" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Travelling</h4>
+                                    <p class="text-gray-400 text-sm">Exploring new places and cultures is a great way to broaden my perspective and recharge.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="py-20 md:py-32 bg-gray-800/50">
+        <!-- Contact section -->
+        <section id="contact" class="py-12 md:py-16 bg-gray-800/50">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">Get In Touch</h2>
-                <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">
+                <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-4">
                     I'm open to new opportunities and collaborations. Feel free to reach out!
                 </p>
-                <div class="flex flex-col space-y-4 max-w-sm mx-auto mb-8 text-left">
+                <div class="flex flex-col space-y-2 max-w-sm mx-auto mb-4 text-left">
                     <a href="mailto:satyahemesh2006@gmail.com" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
-                        <i data-lucide="mail" class="w-6 h-6 mr-4 dynamic-accent-text"></i>
+                        <i data-lucide="mail" class="w-5 h-5 mr-4 dynamic-accent-text"></i>
                         <span>satyahemesh2006@gmail.com</span>
                     </a>
                     <a href="tel:+918919095579" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
-                        <i data-lucide="phone" class="w-6 h-6 mr-4 dynamic-accent-text"></i>
+                        <i data-lucide="phone" class="w-5 h-5 mr-4 dynamic-accent-text"></i>
                         <span>+91 89190 95579</span>
                     </a>
-                     <a href="https://wa.me/918919095579" target="_blank" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
-                        <i data-lucide="message-circle" class="w-6 h-6 mr-4 dynamic-accent-text"></i>
+                    <a href="https://wa.me/918919095579" target="_blank" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
+                        <i data-lucide="message-circle" class="w-5 h-5 mr-4 dynamic-accent-text"></i>
                         <span>WhatsApp: +91 89190 95579</span>
                     </a>
-                     <div class="flex items-center glass-effect p-4 rounded-lg">
-                        <i data-lucide="map-pin" class="w-6 h-6 mr-4 dynamic-accent-text"></i>
+                    <div class="flex items-center glass-effect p-4 rounded-lg">
+                        <i data-lucide="map-pin" class="w-5 h-5 mr-4 dynamic-accent-text"></i>
                         <span>Hyderabad, Telangana</span>
                     </div>
                 </div>
@@ -330,20 +533,33 @@
         </section>
     </main>
 
-    <footer class="py-8">
-        <div class="container mx-auto px-4 text-center text-gray-400">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="https://linkedin.com/in/satya-hemesh-3a1364291" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
-                <a href="https://github.com/SatyaHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-6 h-6"></i></a>
-                <a href="https://instagram.com/urstrulyhemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
-                <a href="https://x.com/urstrulyHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
-                <a href="https://wa.me/918919095579" target="_blank" class="hover:text-cyan-400 transition-colors" title="WhatsApp">
-                    <i data-lucide="message-circle" class="w-6 h-6"></i>
-                </a>
-            </div>
-            <p>&copy; 2025 Routhu Satya Hemesh. Designed with 💙</p>
+ <footer class="py-4">
+    <div class="container mx-auto px-4 text-center text-gray-400">
+        <div class="flex justify-center space-x-6 mb-1">
+            <!-- Social media icons -->
+            <a href="https://linkedin.com/in/satya-hemesh-3a1364291" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+            <a href="https://github.com/SatyaHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+            <a href="https://instagram.com/urstrulyhemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+            <a href="https://x.com/urstrulyHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+            <a href="https://wa.me/918919095579" target="_blank" class="hover:text-cyan-400 transition-colors" title="WhatsApp"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+            <!-- ✅ Facebook Icon -->
+            <a href="https://www.facebook.com/RouthuHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
         </div>
-    </footer>
+        <p>&copy; 2025 Routhu Satya Hemesh. Designed with 💙</p>
+    </div>
+</footer>
+
+    
+    <!-- Project Details Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeProjectModal()">&times;</span>
+            <h3 id="modal-title" class="text-2xl font-bold mb-4 dynamic-accent-text"></h3>
+            <p id="modal-description" class="text-gray-300 mb-6"></p>
+            <a id="modal-demo-button" href="#" target="_blank" class="dynamic-accent-bg text-white font-medium py-3 px-6 rounded-full transition-colors mt-2 inline-block">Go to Demo</a>
+        </div>
+    </div>
+
 
     <script>
         // Initialize Lucide Icons
@@ -397,15 +613,128 @@
             const newHue = Math.floor(Math.random() * 360);
             document.documentElement.style.setProperty('--accent-hue', newHue);
         }
+        
+        // Function to handle the theme toggle
+        function setupThemeToggle() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+            const themeIcon = document.getElementById('theme-icon');
+            const themeIconMobile = document.getElementById('theme-icon-mobile');
+            
+            // Check for saved theme in localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.classList.add(savedTheme);
+            } else {
+                // Default to dark mode if no preference is found
+                document.documentElement.classList.add('dark');
+            }
+            
+            // Function to update icon
+            function updateIcons(isLight) {
+                const iconName = isLight ? 'sun' : 'moon';
+                themeIcon.setAttribute('data-lucide', iconName);
+                themeIconMobile.setAttribute('data-lucide', iconName);
+                lucide.createIcons();
+            }
 
-        // Start the effect and set initial theme colors after the page loads
+            // Update icon on initial load
+            updateIcons(document.documentElement.classList.contains('light'));
+
+            // Toggle logic
+            function toggleTheme() {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                    updateIcons(true);
+                } else {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateIcons(false);
+                }
+            }
+
+            themeToggleBtn.addEventListener('click', toggleTheme);
+            themeToggleBtnMobile.addEventListener('click', toggleTheme);
+        }
+
+        // Project Modal functionality
+        const projects = {
+            'qr-generator': {
+                title: 'QR Code Generator & Scanner',
+                description: 'An offline web app using HTML, JS, Blob & Canvas APIs. It generates QR codes from text and scans them from uploaded images, ensuring user data privacy.',
+                link: 'qr-project.html'
+            },
+            'grade-tracker': {
+                title: 'Student Grade Tracker',
+                description: 'A console-based Java application using OOP for managing student grades. It allows adding students, recording grades, and calculating overall GPA.',
+                link: 'grade-tracker-project.html'
+            },
+            'stock-trading': {
+                title: 'Stock Trading Platform',
+                description: 'A Java application that simulates a real-time stock trading environment. It features a user portfolio and uses file-based storage for data persistence.',
+                link: 'stock-trading-project.html'
+            },
+            'hotel-reservation': {
+                title: 'Hotel Reservation System',
+                description: 'A console-based system for managing hotel bookings, built with Java. It demonstrates Object-Oriented Programming (OOP) principles by modeling rooms, guests, and reservations.',
+                link: 'hotel-reservation-project.html'
+            },
+            'todo-list': {
+                title: 'To-Do List Web App',
+                description: 'A simple and intuitive web application for managing daily tasks. Built with HTML, CSS, and JavaScript, it stores tasks locally in the browser without a database.',
+                link: 'todo-list-project.html'
+            },
+            'weather-app': {
+                title: 'Weather App',
+                description: 'A dynamic web application that displays real-time weather information. It fetches data from a live API and uses Chart.js for interactive data visualization and analytics.',
+                link: 'weather-app-project.html'
+            }
+        };
+
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalDemoButton = document.getElementById('modal-demo-button');
+
+        function showProjectModal(projectId) {
+            const project = projects[projectId];
+            if (project) {
+                modalTitle.textContent = project.title;
+                modalDescription.textContent = project.description;
+                modalDemoButton.href = project.link;
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeProjectModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close the modal if the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeProjectModal();
+            }
+        }
+        
+        // Close the modal when the Escape key is pressed
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'flex') {
+                closeProjectModal();
+            }
+        });
+
+        // Start the effects and set initial theme colors after the page load
         window.onload = function() {
             typeWriter();
             updateThemeColors();
-
-
+            setupThemeToggle();
+            // Change the theme color every 10 seconds
+            setInterval(updateThemeColors, 10000);
         };
-
     </script>
 </body>
 </html>

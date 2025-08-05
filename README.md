@@ -3,7 +3,7 @@
 Welcome to my **personal portfolio website**!  
 This site showcases my **skills, projects, education, and contact details**, all wrapped in a responsive and modern design. Built with **HTML**, **Tailwind CSS**, and **JavaScript**, it's designed to be clean, fast, and fully mobile-friendly.
 
-🚀 **Live Site**: [satyahemesh.netlify.app](https://satyahemesh.netlify.app)
+🚀 **Live Site**: [https://satyahemesh.netlify.app](https://satyahemesh.netlify.app)
 
 ---
 
@@ -24,7 +24,7 @@ This site showcases my **skills, projects, education, and contact details**, all
 - 🧭 Smooth scrolling and scroll progress indicator  
 - ⬆️ Back to Top button  
 - 📌 Sections: Home, About, Skills, Projects, Education, Contact  
-- 🔗 Links to GitHub, LinkedIn, Email  
+- 🔗 Links to GitHub, LinkedIn, and Email  
 
 ---
 
@@ -62,7 +62,7 @@ To view or modify this portfolio locally:
 
 3. **Customize content**
 
-   * Modify text, images, and links in HTML files as needed
+   * Modify text, images, and links in the HTML files as needed
 
 ---
 
@@ -80,5 +80,3 @@ I’d love to connect or collaborate!
 
 This project is open-source and available under the [MIT License](LICENSE).
 Feel free to use, modify, and share!
-
-```

@@ -1,4 +1,3 @@
-
 # 💼 Routhu Satya Hemesh | Portfolio Website
 
 Welcome to my **personal portfolio website**!  
@@ -60,6 +59,7 @@ To view or modify this portfolio locally:
 2. **Open in browser**
 
    * Open `index.html` in any web browser
+
 3. **Customize content**
 
    * Modify text, images, and links in HTML files as needed
@@ -81,4 +81,4 @@ I’d love to connect or collaborate!
 This project is open-source and available under the [MIT License](LICENSE).
 Feel free to use, modify, and share!
 
----
+```

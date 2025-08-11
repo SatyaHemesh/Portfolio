@@ -43,7 +43,6 @@
         }
 
         /* --- LIGHT MODE SPECIFIC STYLES --- */
-        /* These rules override dark mode styles when the 'light' class is present */
         html.light body {
             background-color: #f3f4f6; /* A very light gray */
             color: #1f2937; /* A dark gray for contrast */
@@ -54,34 +53,29 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 0, 0, 0.08);
         }
-        /* Specific overrides for Tailwind classes used in dark mode */
         html.light .bg-gray-900\/80 { background-color: rgba(255, 255, 255, 0.8); }
-        html.light .bg-gray-800\/50 { background-color: #e5e7eb; } /* bg-gray-200 for light mode */
-        html.light .bg-gray-800 { background-color: #d1d5db; }    /* bg-gray-300 for light mode */
-        html.light .bg-gray-700 { background-color: #9ca3af; }    /* bg-gray-400 for light mode */
-        html.light .text-gray-50 { color: #1f2937; } /* Ensures header text is dark */
-        html.light .text-gray-300 { color: #4b5563; } /* text-gray-600 for light mode */
-        html.light .text-gray-400 { color: #4b5563; } /* text-gray-600 for light mode */
+        html.light .bg-gray-800\/50 { background-color: #e5e7eb; }
+        html.light .bg-gray-800 { background-color: #d1d5db; }
+        html.light .bg-gray-700 { background-color: #9ca3af; }
+        html.light .text-gray-50 { color: #1f2937; }
+        html.light .text-gray-300 { color: #4b5563; }
+        html.light .text-gray-400 { color: #4b5563; }
         html.light .hero-background {
             background: radial-gradient(circle at center, #c3dafe 0%, #d1d5db 70%);
         }
         html.light #profileImage {
-            filter: grayscale(20%); /* subtle filter for light mode */
+            filter: grayscale(20%);
         }
         
-        /* Updated Section Title styles for dynamic colors */
         .section-title {
             position: relative;
             font-size: 30px;
             font-weight: 600;
-            margin-bottom: 1rem; /* Reduced margin */
+            margin-bottom: 1rem;
             letter-spacing: 0.03em;
             font-family: 'Nunito', sans-serif;
-            
             color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
-            
             display: inline-block;
-            
             transition: all 0.3s ease-in-out;
             cursor: pointer;
         }
@@ -97,9 +91,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            
             background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-border-lightness));
-            
             transition: width 0.3s ease-in-out;
         }
 
@@ -107,17 +99,14 @@
             width: 100%;
         }
 
-        /* Custom styles for the 'My Projects' heading */
         .projects-title {
             position: relative;
             font-size: 30px;
             font-weight: 700;
-            margin-bottom: 1rem; /* Reduced margin */
+            margin-bottom: 1rem;
             letter-spacing: 0.03em;
             font-family: 'Nunito', sans-serif;
-            
             color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
-            
             display: inline-block;
             transition: all 0.3s ease-in-out;
             cursor: pointer;
@@ -134,9 +123,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            
             background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-border-lightness));
-            
             transition: width 0.3s ease-in-out;
         }
 
@@ -144,7 +131,6 @@
             width: 100%;
         }
 
-        /* Style for the typewriter cursor */
         #typewriter::after {
             content: '|';
             animation: blink 1s step-end infinite;
@@ -154,7 +140,6 @@
             50% { border-color: #f9fafb; }
         }
         
-        /* Innovative Hero Section Background */
         .hero-background {
             background: radial-gradient(circle at center, #2c3e50 0%, #111827 70%);
             background-size: 200% 200%;
@@ -167,7 +152,6 @@
             100% { background-position: 0% 0%; }
         }
 
-        /* Dynamic accent colors for buttons and borders */
         .dynamic-accent-bg {
             background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
         }
@@ -181,14 +165,12 @@
             color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
         }
         
-        /* Custom styles for the toggle button */
         #theme-toggle {
             cursor: pointer;
         }
         
-        /* Modal-specific styles */
         .modal {
-            display: none; /* Hidden by default */
+            display: none;
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -203,7 +185,7 @@
             align-items: center;
         }
         .modal-content {
-            background-color: #1f2937; /* bg-gray-800 */
+            background-color: #1f2937;
             margin: 10% auto;
             padding: 2rem;
             border-radius: 0.5rem;
@@ -218,18 +200,40 @@
             right: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #d1d5db; /* text-gray-400 */
+            color: #d1d5db;
             transition: color 0.2s ease-in-out;
         }
         .close-button:hover {
-            color: #ef4444; /* text-red-500 */
+            color: #ef4444;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         html.light .modal-content {
-            background-color: #d1d5db; /* bg-gray-300 */
+            background-color: #d1d5db;
+        }
+
+        /* Form field styles */
+        .form-field {
+            background-color: #374151; /* bg-gray-700 */
+            border: 1px solid #4b5563; /* border-gray-600 */
+            color: #f9fafb; /* text-gray-50 */
+            transition: all 0.2s ease;
+        }
+        .form-field:focus {
+            outline: none;
+            border-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+            box-shadow: 0 0 0 2px rgba(hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness)), 0.5);
+        }
+        html.light .form-field {
+            background-color: #e5e7eb; /* bg-gray-200 */
+            border-color: #d1d5db; /* border-gray-300 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        html.light .form-field:focus {
+            border-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+            box-shadow: 0 0 0 2px rgba(hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness)), 0.5);
         }
     </style>
 </head>
@@ -277,7 +281,6 @@
     </div>
 
     <main>
-        <!-- Hero section -->
         <section id="hero" class="min-h-screen flex items-center justify-center text-center hero-background relative overflow-hidden">
             <div class="absolute inset-0 z-0 flex items-center justify-center">
                 <div class="relative w-full h-full flex items-center justify-center">
@@ -304,7 +307,6 @@
             </div>
         </section>
 
-        <!-- About section -->
         <section id="about" class="pt-12 pb-6 md:pt-16 md:pb-8">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">About Me</h2>
@@ -316,38 +318,31 @@
             </div>
         </section>
 
-        <!-- Projects section with hover effect -->
         <section id="projects" class="pt-6 pb-12 md:pt-8 md:pb-16 bg-gray-800/50">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="projects-title">My Projects</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
                     
-                    <!-- QR Code Generator -->
                     <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('qr-generator')">
                         <img src="https://placehold.co/600x400/1f2937/ffffff?text=QR+Generator" alt="QR Code Generator" class="w-full h-36 object-cover">
                     </div>
 
-                    <!-- Student Grade Tracker -->
                     <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('grade-tracker')">
                         <img src="https://placehold.co/600x400/1f2937/ffffff?text=Grade+Tracker" alt="Student Grade Tracker" class="w-full h-36 object-cover">
                     </div>
                     
-                    <!-- Stock Trading Platform -->
                     <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('stock-trading')">
                         <img src="https://placehold.co/600x400/1f2937/ffffff?text=Stock+Trading" alt="Stock Trading Platform" class="w-full h-36 object-cover">
                     </div>
                     
-                    <!-- Hotel Reservation System -->
                     <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('hotel-reservation')">
                         <img src="https://placehold.co/600x400/1f2937/ffffff?text=Hotel+System" alt="Hotel Reservation System" class="w-full h-36 object-cover">
                     </div>
 
-                    <!-- To-Do List Web App -->
                     <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('todo-list')">
                         <img src="https://placehold.co/600x400/1f2937/ffffff?text=To-Do+App" alt="To-Do List Web App" class="w-full h-36 object-cover">
                     </div>
 
-                    <!-- Weather App -->
                     <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('weather-app')">
                         <img src="https://placehold.co/600x400/1f2937/ffffff?text=Weather+App" alt="Weather App" class="w-full h-36 object-cover">
                     </div>
@@ -355,7 +350,6 @@
             </div>
         </section>
 
-        <!-- Skills section -->
         <section id="skills" class="py-12 md:py-16">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">My Tech Stack</h2>
@@ -389,14 +383,12 @@
                         <span class="font-medium">Git</span>
                     </div>
                     <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
-                        <!-- GitHub logo now inverts correctly for dark mode only -->
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original-wordmark.svg" class="w-20 h-20 dark:invert" />
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Education section -->
         <section id="education" class="py-12 md:py-16 bg-gray-800/50">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">Education</h2>
@@ -420,13 +412,11 @@
             </div>
         </section>
 
-        <!-- Activities & Hobbies section -->
         <section id="activities" class="py-12 md:py-16">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">Activities & Hobbies</h2>
                 
                 <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                    <!-- Activities Card -->
                     <div class="glass-effect p-6 rounded-lg shadow-lg flex flex-col items-center text-left">
                         <i data-lucide="award" class="w-12 h-12 mb-4 dynamic-accent-text"></i>
                         <h3 class="text-xl font-bold mb-4">My Activities</h3>
@@ -462,7 +452,6 @@
                         </ul>
                     </div>
                     
-                    <!-- Hobbies Card -->
                     <div class="glass-effect p-6 rounded-lg shadow-lg flex flex-col items-center text-left">
                         <i data-lucide="heart" class="w-12 h-12 mb-4 dynamic-accent-text"></i>
                         <h3 class="text-xl font-bold mb-4">My Hobbies</h3>
@@ -501,62 +490,68 @@
             </div>
         </section>
 
-        <!-- Contact section -->
         <section id="contact" class="py-12 md:py-16 bg-gray-800/50">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="section-title">Get In Touch</h2>
-                <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-4">
-                    I'm open to new opportunities and collaborations. Feel free to reach out!
+                <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">
+                    I'm open to new opportunities and collaborations. Feel free to reach out using the form below!
                 </p>
-                <div class="flex flex-col space-y-2 max-w-sm mx-auto mb-4 text-left">
-                    <a href="mailto:satyahemesh2006@gmail.com" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
-                        <i data-lucide="mail" class="w-5 h-5 mr-4 dynamic-accent-text"></i>
-                        <span>satyahemesh2006@gmail.com</span>
-                    </a>
-                    <a href="tel:+918919095579" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
-                        <i data-lucide="phone" class="w-5 h-5 mr-4 dynamic-accent-text"></i>
-                        <span>+91 89190 95579</span>
-                    </a>
-                    <a href="https://wa.me/918919095579" target="_blank" class="flex items-center glass-effect p-4 rounded-lg hover:bg-gray-700 transition-colors">
-                        <i data-lucide="message-circle" class="w-5 h-5 mr-4 dynamic-accent-text"></i>
-                        <span>WhatsApp: +91 89190 95579</span>
-                    </a>
-                    <div class="flex items-center glass-effect p-4 rounded-lg">
-                        <i data-lucide="map-pin" class="w-5 h-5 mr-4 dynamic-accent-text"></i>
-                        <span>Hyderabad, Telangana</span>
-                    </div>
+                <div class="max-w-xl mx-auto glass-effect p-8 rounded-lg">
+                    <form id="contact-form" action="https://formspree.io/f/xzzvopby" method="POST" onsubmit="handleFormSubmit(event)">
+                        <div class="mb-4 text-left">
+                            <label for="name" class="block text-gray-300 font-bold mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg form-field" placeholder="Your Name" required onfocus="updateAccentColor(event)">
+                        </div>
+                        <div class="mb-4 text-left">
+                            <label for="email" class="block text-gray-300 font-bold mb-2">Email Address</label>
+                            <input type="email" id="email" name="_replyto" class="w-full px-4 py-3 rounded-lg form-field" placeholder="you@example.com" required onfocus="updateAccentColor(event)">
+                        </div>
+                        <div class="mb-6 text-left">
+                            <label for="message" class="block text-gray-300 font-bold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg form-field" placeholder="Your message here..." required onfocus="updateAccentColor(event)"></textarea>
+                        </div>
+                        <button type="submit" class="dynamic-accent-bg text-white font-bold py-4 px-8 rounded-full text-lg w-full transition-transform transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
                 </div>
-                <a href="mailto:satyahemesh2006@gmail.com" class="inline-block dynamic-accent-bg text-white font-bold py-4 px-8 rounded-full text-lg transition-transform transform hover:scale-105">
-                    Say Hello
-                </a>
+                
+                <div class="flex justify-center space-x-6 mt-8">
+                    <a href="https://linkedin.com/in/satya-hemesh-3a1364291" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                    <a href="https://github.com/SatyaHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-6 h-6"></i></a>
+                    <a href="https://instagram.com/urstrulyhemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                    <a href="https://x.com/urstrulyHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                    <a href="https://wa.me/918919095579" target="_blank" class="hover:text-cyan-400 transition-colors" title="WhatsApp"><i data-lucide="message-circle" class="w-6 h-6"></i></a>
+                    <a href="https://www.facebook.com/RouthuHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+<a href="mailto:satyahemesh2006@gmail.com" class="hover:text-cyan-400 transition-colors" title="Email"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                </div>
             </div>
         </section>
     </main>
 
  <footer class="py-4">
     <div class="container mx-auto px-4 text-center text-gray-400">
-        <div class="flex justify-center space-x-6 mb-1">
-            <!-- Social media icons -->
-            <a href="https://linkedin.com/in/satya-hemesh-3a1364291" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-            <a href="https://github.com/SatyaHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-            <a href="https://instagram.com/urstrulyhemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-            <a href="https://x.com/urstrulyHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
-            <a href="https://wa.me/918919095579" target="_blank" class="hover:text-cyan-400 transition-colors" title="WhatsApp"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
-            <!-- ✅ Facebook Icon -->
-            <a href="https://www.facebook.com/RouthuHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-        </div>
         <p>&copy; 2025 Routhu Satya Hemesh. Designed with 💙</p>
     </div>
 </footer>
 
     
-    <!-- Project Details Modal -->
     <div id="project-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeProjectModal()">&times;</span>
             <h3 id="modal-title" class="text-2xl font-bold mb-4 dynamic-accent-text"></h3>
             <p id="modal-description" class="text-gray-300 mb-6"></p>
             <a id="modal-demo-button" href="#" target="_blank" class="dynamic-accent-bg text-white font-medium py-3 px-6 rounded-full transition-colors mt-2 inline-block">Go to Demo</a>
+        </div>
+    </div>
+
+    <div id="thank-you-modal" class="modal">
+        <div class="modal-content text-center">
+            <span class="close-button" onclick="closeThankYouModal()">&times;</span>
+            <i data-lucide="check-circle" class="w-16 h-16 mx-auto mb-4 dynamic-accent-text"></i>
+            <h3 class="text-2xl font-bold mb-4 dynamic-accent-text">Thank You!</h3>
+            <p class="text-gray-300 mb-6">Your message has been sent successfully. I will get back to you soon.</p>
+            <button onclick="closeThankYouModal()" class="dynamic-accent-bg text-white font-medium py-3 px-6 rounded-full transition-colors inline-block">Close</button>
         </div>
     </div>
 
@@ -612,6 +607,14 @@
         function updateThemeColors() {
             const newHue = Math.floor(Math.random() * 360);
             document.documentElement.style.setProperty('--accent-hue', newHue);
+        }
+
+        // Function to handle form field accent color
+        function updateAccentColor(event) {
+            // This function is now used to ensure a color refresh on focus, though
+            // the main accent color changes on window load.
+            // You can enhance this to change color on every focus if you like,
+            // but for now, it just ensures the CSS variable is set.
         }
         
         // Function to handle the theme toggle
@@ -718,6 +721,9 @@
             if (event.target == modal) {
                 closeProjectModal();
             }
+            if (event.target == thankYouModal) {
+                closeThankYouModal();
+            }
         }
         
         // Close the modal when the Escape key is pressed
@@ -725,15 +731,53 @@
             if (event.key === 'Escape' && modal.style.display === 'flex') {
                 closeProjectModal();
             }
+            if (event.key === 'Escape' && thankYouModal.style.display === 'flex') {
+                closeThankYouModal();
+            }
         });
+
+        // Form submission and modal handling
+        const thankYouModal = document.getElementById('thank-you-modal');
+        const contactForm = document.getElementById('contact-form');
+
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const form = event.target;
+            const data = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    showThankYouModal();
+                    form.reset(); // Clear the form fields
+                } else {
+                    alert('There was a problem with your submission. Please try again.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+        }
+
+        function showThankYouModal() {
+            thankYouModal.style.display = 'flex';
+        }
+
+        function closeThankYouModal() {
+            thankYouModal.style.display = 'none';
+        }
 
         // Start the effects and set initial theme colors after the page load
         window.onload = function() {
             typeWriter();
             updateThemeColors();
             setupThemeToggle();
-            // Change the theme color every 10 seconds
-            setInterval(updateThemeColors, 10000);
         };
     </script>
 </body>

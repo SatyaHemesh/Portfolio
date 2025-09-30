@@ -1,4 +1,3 @@
-﻿
 # 🌐 Satya Hemesh - Portfolio  
 
 Welcome to my personal portfolio website!  
@@ -127,3 +126,4 @@ SOFTWARE.
 
 ✨ *Thank you for visiting my portfolio!*  
 ---
+

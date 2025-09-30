@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routhu Satya Hemesh | Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Define CSS variables for dynamic colors */
+        :root {
+            --accent-hue: 180; /* Initial cyan hue */
+            --accent-saturation: 80%;
+            --accent-lightness: 40%;
+            --accent-lightness-hover: 30%;
+            --accent-border-lightness: 50%;
+        }
+
+        /* Base styles for dark mode (default) */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #f9fafb; /* text-gray-50 */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- LIGHT MODE SPECIFIC STYLES --- */
+        html.light body {
+            background-color: #f3f4f6; /* A very light gray */
+            color: #1f2937; /* A dark gray for contrast */
+        }
+        html.light .glass-effect {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        html.light .bg-gray-900\/80 { background-color: rgba(255, 255, 255, 0.8); }
+        html.light .bg-gray-800\/50 { background-color: #e5e7eb; }
+        html.light .bg-gray-800 { background-color: #d1d5db; }
+        html.light .bg-gray-700 { background-color: #9ca3af; }
+        html.light .text-gray-50 { color: #1f2937; }
+        html.light .text-gray-300 { color: #4b5563; }
+        html.light .text-gray-400 { color: #4b5563; }
+        html.light .hero-background {
+            background: radial-gradient(circle at center, #c3dafe 0%, #d1d5db 70%);
+        }
+        html.light #profileImage {
+            filter: grayscale(20%);
+        }
+        
+        .section-title {
+            position: relative;
+            font-size: 30px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.03em;
+            font-family: 'Nunito', sans-serif;
+            color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .section-title:hover {
+            transform: scale(1.02);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-border-lightness));
+            transition: width 0.3s ease-in-out;
+        }
+
+        .section-title:hover::after {
+            width: 100%;
+        }
+
+        .projects-title {
+            position: relative;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 0.03em;
+            font-family: 'Nunito', sans-serif;
+            color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .projects-title:hover {
+            transform: scale(1.02);
+        }
+
+        .projects-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-border-lightness));
+            transition: width 0.3s ease-in-out;
+        }
+
+        .projects-title:hover::after {
+            width: 100%;
+        }
+
+        #typewriter::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+
+        #profileImage {
+            object-position: center 25%; /* Adjusts vertical position */
+        }
+        
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #f9fafb; }
+        }
+        
+        .hero-background {
+            background: radial-gradient(circle at center, #2c3e50 0%, #111827 70%);
+            background-size: 100% 100%;
+            animation: gradient-animation 15s ease infinite;
+        }
+
+.hero-background-image {
+            object-position: center 23%; /* Adjusts vertical position for the background image */
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .dynamic-accent-bg {
+            background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+        }
+        .dynamic-accent-bg:hover {
+            background-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness-hover));
+        }
+        .dynamic-accent-border {
+            border-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-border-lightness));
+        }
+        .dynamic-accent-text {
+            color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+        }
+        
+        #theme-toggle {
+            cursor: pointer;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #1f2937;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #d1d5db;
+            transition: color 0.2s ease-in-out;
+        }
+        .close-button:hover {
+            color: #ef4444;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        html.light .modal-content {
+            background-color: #d1d5db;
+        }
+
+        /* Form field styles */
+        .form-field {
+            background-color: #374151; /* bg-gray-700 */
+            border: 1px solid #4b5563; /* border-gray-600 */
+            color: #f9fafb; /* text-gray-50 */
+            transition: all 0.2s ease;
+        }
+        .form-field:focus {
+            outline: none;
+            border-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+            box-shadow: 0 0 0 2px rgba(hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness)), 0.5);
+        }
+        html.light .form-field {
+            background-color: #e5e7eb; /* bg-gray-200 */
+            border-color: #d1d5db; /* border-gray-300 */
+            color: #1f2937; /* text-gray-900 */
+        }
+        html.light .form-field:focus {
+            border-color: hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness));
+            box-shadow: 0 0 0 2px rgba(hsl(var(--accent-hue), var(--accent-saturation), var(--accent-lightness)), 0.5);
+        }
+    </style>
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/svg+xml" href="assets/favicons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicons/favicon-96x96.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="assets/favicons/favicon.ico">
+
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center glass-effect rounded-full px-6 py-3">
+                <a href="#" class="flex items-center space-x-3">
+                    <img src="assets/images/logo.png" alt="Routhu Satya Hemesh Logo" class="h-10 w-10 rounded-full">
+                    <span class="text-lg font-bold">Routhu Satya Hemesh</span>
+                </a>
+                <nav class="hidden md:flex space-x-6 items-center">
+                    <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#education" class="hover:text-cyan-400 transition-colors">Education</a>
+                    <a href="#activities" class="hover:text-cyan-400 transition-colors">Activities</a>
+                    <a href="#contact" class="dynamic-accent-bg text-white font-medium py-2 px-4 rounded-full transition-colors">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-700 transition-colors">
+                        <i id="theme-icon" data-lucide="moon" class="w-5 h-5 text-gray-50"></i>
+                    </button>
+                </nav>
+                <div class="flex items-center space-x-4 md:hidden">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-gray-700 transition-colors">
+                        <i id="theme-icon-mobile" data-lucide="moon" class="w-5 h-5"></i>
+                    </button>
+                    <button id="mobile-menu-button">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-95 z-40">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-lg">
+            <a href="#about" class="mobile-menu-link">About</a>
+            <a href="#projects" class="mobile-menu-link">Projects</a>
+            <a href="#skills" class="mobile-menu-link">Skills</a>
+            <a href="#education" class="mobile-menu-link">Education</a>
+            <a href="#activities" class="mobile-menu-link">Activities</a>
+            <a href="#contact" class="mobile-menu-link">Contact</a>
+            <button id="mobile-menu-close" class="absolute top-8 right-8">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center hero-background relative overflow-hidden">
+            <div class="absolute inset-0 z-0 flex items-center justify-center">
+                <div class="relative w-full h-full flex items-center justify-center">
+                    <img src="assets/images/profile-picture.jpg" alt="Routhu Satya Hemesh Background" class="hero-background-image absolute inset-0 w-full h-full object-cover opacity-30"> 
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <img id="profileImage" src="assets/images/profile-picture.jpg" alt="Routhu Satya Hemesh" class="w-40 h-40 rounded-full mx-auto mb-2 border-4 dynamic-accent-border shadow-lg object-cover">
+                
+                <h1 class="text-4xl md:text-6xl font-bold mb-2">Hi, I'm Routhu Satya Hemesh</h1>
+                <p id="typewriter" class="text-lg md:text-2xl text-gray-300 mb-6 h-8"></p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
+                    <a href="#projects" class="dynamic-accent-bg text-white font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 w-full sm:w-auto">View My Work</a>
+                    <a href="assets/documents/Routhu Satya Hemesh.pdf" download class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 w-full sm:w-auto flex items-center justify-center">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                        Download Resume
+                    </a>
+                    <a href="assets/documents/Cover_Letter.pdf" download="Cover_Letter.pdf" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition-transform transform hover:scale-105 w-full sm:w-auto flex items-center justify-center mt-4 sm:mt-0">
+                        <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                        Download Cover Letter
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="pt-12 pb-6 md:pt-16 md:pb-8">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">About Me</h2>
+                <div class="max-w-3xl mx-auto text-center text-gray-300 text-lg leading-relaxed">
+                    <p>
+                        I am a passionate Computer Science and Engineering student at ACE Engineering College. I enjoy developing real-world applications and constantly improving my skills in Java, C, JavaScript, MySQL, and modern web technologies.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="pt-6 pb-12 md:pt-8 md:pb-16 bg-gray-800/50">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="projects-title">My Projects</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+                    
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('qr-generator')">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=QR+Generator" alt="QR Code Generator" class="w-full h-36 object-cover">
+                    </div>
+                                     
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('todo-list')">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=To-Do+App" alt="To-Do List Web App" class="w-full h-36 object-cover">
+                    </div>
+
+                    <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-all duration-300 cursor-pointer" onclick="showProjectModal('weather-app')">
+                        <img src="https://placehold.co/600x400/1f2937/ffffff?text=Weather+App" alt="Weather App" class="w-full h-36 object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-12 md:py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">My Tech Stack</h2>
+                <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-6">
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="w-12 h-12" />
+                        <span class="font-medium">Java</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" class="w-12 h-12" />
+                        <span class="font-medium">C</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-12 h-12" />
+                        <span class="font-medium">JavaScript</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="w-12 h-12" />
+                        <span class="font-medium">HTML5</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="w-12 h-12" />
+                        <span class="font-medium">CSS3</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="w-12 h-12" />
+                        <span class="font-medium">MySQL</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="w-12 h-12" />
+                        <span class="font-medium">Git</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 p-4 transition-transform transform hover:scale-110">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original-wordmark.svg" class="w-20 h-20 dark:invert" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="education" class="py-12 md:py-16 bg-gray-800/50">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">Education</h2>
+                <div class="max-w-3xl mx-auto space-y-2">
+                    <div class="glass-effect p-4 rounded-lg">
+                        <h3 class="text-lg font-bold">B.Tech, Computer Science & Engineering</h3>
+                        <p class="dynamic-accent-text font-medium">ACE Engineering College (2023 – 2027)</p>
+                        <p class="text-gray-400 mt-2">CGPA: 6.75</p>
+                    </div>
+                    <div class="glass-effect p-4 rounded-lg">
+                        <h3 class="text-lg font-bold">Intermediate (MPC)</h3>
+                        <p class="dynamic-accent-text font-medium">Sri Chaitanya Junior College (2021 – 2023)</p>
+                        <p class="text-gray-400 mt-2">Score: 781/1000</p>
+                    </div>
+                    <div class="glass-effect p-4 rounded-lg">
+                        <h3 class="text-lg font-bold">10th Class</h3>
+                        <p class="dynamic-accent-text font-medium">Narayana E-Techno School (2020 – 2021)</p>
+                        <p class="text-gray-400 mt-2">Score: 326/500</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="activities" class="py-12 md:py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">Activities & Hobbies</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                    <div class="glass-effect p-6 rounded-lg shadow-lg flex flex-col items-center text-left">
+                        <i data-lucide="award" class="w-12 h-12 mb-4 dynamic-accent-text"></i>
+                        <h3 class="text-xl font-bold mb-4">My Activities</h3>
+                        <ul class="list-none space-y-4 w-full">
+                            <li class="flex items-start">
+                                <i data-lucide="mic" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Anchoring & Hosting</h4>
+                                    <p class="text-gray-400 text-sm">Successfully hosted and anchored various college events, improving public speaking and stage presence.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="laptop" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Smart India Hackathon 2024</h4>
+                                    <p class="text-gray-400 text-sm">Participated in a national-level hackathon, collaborating with a team to build a technical solution for a real-world problem.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="presentation" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Vignan Vaibhav 2025</h4>
+                                    <p class="text-gray-400 text-sm">Presented a research paper on a technical topic at this prestigious event sponsored by DRDO.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="medal" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Code Pragnya 2024 Finalist</h4>
+                                    <p class="text-gray-400 text-sm">Reached the final round of a competitive coding challenge, demonstrating strong problem-solving skills.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass-effect p-6 rounded-lg shadow-lg flex flex-col items-center text-left">
+                        <i data-lucide="heart" class="w-12 h-12 mb-4 dynamic-accent-text"></i>
+                        <h3 class="text-xl font-bold mb-4">My Hobbies</h3>
+                        <ul class="list-none space-y-4 w-full">
+                            <li class="flex items-start">
+                                <i data-lucide="music" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Music</h4>
+                                    <p class="text-gray-400 text-sm">Enjoy listening to and discovering new music from various genres to relax and get inspired.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="trophy" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Badminton</h4>
+                                    <p class="text-gray-400 text-sm">A passionate player, I enjoy the competitive spirit and physical activity of the sport.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="chef-hat" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Cooking</h4>
+                                    <p class="text-gray-400 text-sm">Love experimenting with new recipes and cooking for friends and family.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="plane" class="w-5 h-5 mr-4 mt-1 shrink-0 dynamic-accent-text"></i>
+                                <div>
+                                    <h4 class="font-bold">Travelling</h4>
+                                    <p class="text-gray-400 text-sm">Exploring new places and cultures is a great way to broaden my perspective and recharge.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-12 md:py-16 bg-gray-800/50">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-8">
+                    I'm open to new opportunities and collaborations. Feel free to reach out using the form below!
+                </p>
+                <div class="max-w-xl mx-auto glass-effect p-8 rounded-lg">
+                    <form id="contact-form" action="https://formspree.io/f/xzzvopby" method="POST" onsubmit="handleFormSubmit(event)">
+                        <div class="mb-4 text-left">
+                            <label for="name" class="block text-gray-300 font-bold mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg form-field" placeholder="Your Name" required onfocus="updateAccentColor(event)">
+                        </div>
+                        <div class="mb-4 text-left">
+                            <label for="email" class="block text-gray-300 font-bold mb-2">Email Address</label>
+                            <input type="email" id="email" name="_replyto" class="w-full px-4 py-3 rounded-lg form-field" placeholder="you@example.com" required onfocus="updateAccentColor(event)">
+                        </div>
+                        <div class="mb-6 text-left">
+                            <label for="message" class="block text-gray-300 font-bold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg form-field" placeholder="Your message here..." required onfocus="updateAccentColor(event)"></textarea>
+                        </div>
+                        <button type="submit" class="dynamic-accent-bg text-white font-bold py-4 px-8 rounded-full text-lg w-full transition-transform transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="flex justify-center space-x-6 mt-8">
+                    <a href="https://linkedin.com/in/satya-hemesh-3a1364291" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                    <a href="https://github.com/SatyaHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="github" class="w-6 h-6"></i></a>
+                    <a href="https://instagram.com/urstrulyhemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                    <a href="https://x.com/urstrulyHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                    <a href="https://wa.me/918919095579" target="_blank" class="hover:text-cyan-400 transition-colors" title="WhatsApp"><i data-lucide="message-circle" class="w-6 h-6"></i></a>
+                    <a href="https://www.facebook.com/RouthuHemesh" target="_blank" class="hover:text-cyan-400 transition-colors"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+<a href="mailto:satyahemesh2006@gmail.com" class="hover:text-cyan-400 transition-colors" title="Email"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+ <footer class="py-4">
+    <div class="container mx-auto px-4 text-center text-gray-400">
+        <p>&copy; 2025 Routhu Satya Hemesh. Designed with 💙</p>
+    </div>
+</footer>
+
+    
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeProjectModal()">&times;</span>
+            <h3 id="modal-title" class="text-2xl font-bold mb-4 dynamic-accent-text"></h3>
+            <p id="modal-description" class="text-gray-300 mb-6"></p>
+            <a id="modal-demo-button" href="#" target="_blank" class="dynamic-accent-bg text-white font-medium py-3 px-6 rounded-full transition-colors mt-2 inline-block">Go to Demo</a>
+        </div>
+    </div>
+
+    <div id="thank-you-modal" class="modal">
+        <div class="modal-content text-center">
+            <span class="close-button" onclick="closeThankYouModal()">&times;</span>
+            <i data-lucide="check-circle" class="w-16 h-16 mx-auto mb-4 dynamic-accent-text"></i>
+            <h3 class="text-2xl font-bold mb-4 dynamic-accent-text">Thank You!</h3>
+            <p class="text-gray-300 mb-6">Your message has been sent successfully. I will get back to you soon.</p>
+            <button onclick="closeThankYouModal()" class="dynamic-accent-bg text-white font-medium py-3 px-6 rounded-full transition-colors inline-block">Close</button>
+        </div>
+    </div>
+
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.onscroll = () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-gray-900/80', 'backdrop-blur-sm', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-gray-900/80', 'backdrop-blur-sm', 'shadow-lg');
+            }
+        };
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+        
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Typewriter Effect
+        const typeWriterText = "| B.Tech CSE | Developer | Tech Enthusiast ";
+        const typewriterElement = document.getElementById("typewriter");
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < typeWriterText.length) {
+                typewriterElement.innerHTML += typeWriterText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 80);
+            }
+        }
+
+        // Function to update the theme colors dynamically
+        function updateThemeColors() {
+            const newHue = Math.floor(Math.random() * 360);
+            document.documentElement.style.setProperty('--accent-hue', newHue);
+        }
+
+        // Function to handle form field accent color
+        function updateAccentColor(event) {
+            // This function is now used to ensure a color refresh on focus, though
+            // the main accent color changes on window load.
+            // You can enhance this to change color on every focus if you like,
+            // but for now, it just ensures the CSS variable is set.
+        }
+        
+        // Function to handle the theme toggle
+        function setupThemeToggle() {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+            const themeIcon = document.getElementById('theme-icon');
+            const themeIconMobile = document.getElementById('theme-icon-mobile');
+            
+            // Check for saved theme in localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.documentElement.classList.add(savedTheme);
+            } else {
+                // Default to dark mode if no preference is found
+                document.documentElement.classList.add('dark');
+            }
+            
+            // Function to update icon
+            function updateIcons(isLight) {
+                const iconName = isLight ? 'sun' : 'moon';
+                themeIcon.setAttribute('data-lucide', iconName);
+                themeIconMobile.setAttribute('data-lucide', iconName);
+                lucide.createIcons();
+            }
+
+            // Update icon on initial load
+            updateIcons(document.documentElement.classList.contains('light'));
+
+            // Toggle logic
+            function toggleTheme() {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                    updateIcons(true);
+                } else {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateIcons(false);
+                }
+            }
+
+            themeToggleBtn.addEventListener('click', toggleTheme);
+            themeToggleBtnMobile.addEventListener('click', toggleTheme);
+        }
+
+        // Project Modal functionality
+        const projects = {
+            'qr-generator': {
+                title: 'QR Code Generator & Scanner',
+                description: 'An offline web app using HTML, JS, Blob & Canvas APIs. It generates QR codes from text and scans them from uploaded images, ensuring user data privacy.',
+                link: 'projects/qr-project.html'
+            },
+                                    'todo-list': {
+                title: 'To-Do List Web App',
+                description: 'A simple and intuitive web application for managing daily tasks. Built with HTML, CSS, and JavaScript, it stores tasks locally in the browser without a database.',
+                link: 'projects/todo-list-project.html'
+            },
+            'weather-app': {
+                title: 'Weather App',
+                description: 'A dynamic web application that displays real-time weather information. It fetches data from a live API and uses Chart.js for interactive data visualization and analytics.',
+                link: 'projects/weather-app-project.html'
+            }
+        };
+
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalDemoButton = document.getElementById('modal-demo-button');
+
+        function showProjectModal(projectId) {
+            const project = projects[projectId];
+            if (project) {
+                modalTitle.textContent = project.title;
+                modalDescription.textContent = project.description;
+                modalDemoButton.href = project.link;
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeProjectModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close the modal if the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeProjectModal();
+            }
+            if (event.target == thankYouModal) {
+                closeThankYouModal();
+            }
+        }
+        
+        // Close the modal when the Escape key is pressed
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'flex') {
+                closeProjectModal();
+            }
+            if (event.key === 'Escape' && thankYouModal.style.display === 'flex') {
+                closeThankYouModal();
+            }
+        });
+
+        // Form submission and modal handling
+        const thankYouModal = document.getElementById('thank-you-modal');
+        const contactForm = document.getElementById('contact-form');
+
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const form = event.target;
+            const data = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    showThankYouModal();
+                    form.reset(); // Clear the form fields
+                } else {
+                    alert('There was a problem with your submission. Please try again.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+        }
+
+        function showThankYouModal() {
+            thankYouModal.style.display = 'flex';
+        }
+
+        function closeThankYouModal() {
+            thankYouModal.style.display = 'none';
+        }
+
+        // Start the effects and set initial theme colors after the page load
+        window.onload = function() {
+            typeWriter();
+            updateThemeColors();
+            setupThemeToggle();
+        };
+    </script>
+</body>
+</html>

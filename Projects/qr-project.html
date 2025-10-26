@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator and Scanner - My Project</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f4; text-align: center; }
+        h1, h2 { color: #333; }
+        input[type="text"], input[type="file"] { margin: 10px; padding: 8px; width: 80%; max-width: 400px; }
+        #drop-zone {
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px dashed #0078d4;
+            background: #eaf4ff;
+            cursor: pointer;
+        }
+        button { margin: 10px; padding: 10px 20px; background: #0078d4; color: #fff; border: none; cursor: pointer; }
+        button:hover { background: #005ea2; }
+        canvas, img { margin: 20px auto; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+        a { display: inline-block; margin-top: 10px; color: #0078d4; text-decoration: none; }
+        #scan-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: none;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        #warning {
+            color: red;
+            margin-top: 10px;
+        }
+        #scan-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #progress-bar {
+            width: 80%;
+            max-width: 400px;
+            margin: 10px auto;
+            display: none;
+        }
+        /* Toast message styling */
+        .toast-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInOut 3s forwards;
+            font-size: 0.95em;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(20px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(20px); }
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator and Scanner</h1>
+    <div>
+        <input type="text" id="text-input" placeholder="Enter text or URL" />
+        <input type="file" id="image-input" accept="image/*" />
+        <div id="drop-zone">Drag and drop an image here to embed (requires internet for large images)</div>
+        <progress id="progress-bar" value="0" max="100"></progress>
+        <button onclick="uploadAndGenerateQR()">Generate QR Code</button>
+    </div>
+    <canvas id="qr-code" width="250" height="250"></canvas>
+    <br />
+    <a id="download-link" style="display: none" download="qr-code.png">Download QR Code</a>
+    <hr />
+    <h2>QR Code Scanner (Image Upload)</h2>
+    <div id="scan-container">
+        <input type="file" id="qr-scan-input" accept="image/*" />
+        <button onclick="decodeQR()">Decode QR Code</button>
+        <pre id="decoded-output" style="white-space: pre-wrap; text-align: left; max-width: 90%; margin-top: 10px;"></pre>
+        <div id="warning"></div>
+        <img id="scan-image" alt="Decoded image will appear here" />
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://unpkg.com/jsqr/dist/jsQR.js"></script>
+    <script>
+        const qrCanvas = document.getElementById('qr-code');
+        const downloadLink = document.getElementById('download-link');
+        const qr = new QRious({ element: qrCanvas, size: 250 });
+        const progressBar = document.getElementById('progress-bar');
+        const dropZone = document.getElementById('drop-zone');
+
+        dropZone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropZone.style.background = '#d0eaff';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.background = '#eaf4ff';
+        });
+
+        dropZone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropZone.style.background = '#eaf4ff';
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('image-input').files = files;
+            }
+        });
+
+        function uploadAndGenerateQR() {
+            const text = document.getElementById('text-input').value.trim();
+            const file = document.getElementById('image-input').files[0];
+
+            qr.value = ''; // Clear previous QR
+            downloadLink.style.display = 'none'; // Hide download link
+
+            if (file) {
+                if (!navigator.onLine) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const base64Data = reader.result;
+                        if (base64Data.length > 2950) {
+                            alert("⚠️ Image data too large to embed directly in QR code offline. Try using a smaller image or connect to the internet for cloud upload.");
+                            return;
+                        }
+                        try {
+                            qr.value = base64Data;
+                            showDownload();
+                        } catch (error) {
+                            alert("Failed to generate QR from image data offline. Image might be too complex or data too long.");
+                        }
+                    };
+                    reader.onerror = () => {
+                        alert("Error reading file for offline encoding.");
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    const formData = new FormData();
+                    formData.append('image', file);
+                    const apiKey = 'b094e5930b7b22dd6c36edde6379b02c'; // <--- REPLACE WITH YOUR ACTUAL IMGBB API KEY!
+                    progressBar.style.display = 'block';
+                    progressBar.value = 0;
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', `https://api.imgbb.com/1/upload?key=${apiKey}`);
+                    xhr.upload.onprogress = e => {
+                        if (e.lengthComputable) {
+                            const percentComplete = (e.loaded / e.total) * 100;
+                            progressBar.value = percentComplete;
+                        }
+                    };
+                    xhr.onload = () => {
+                        progressBar.style.display = 'none';
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            const data = JSON.parse(xhr.responseText);
+                            if (data.success) {
+                                qr.value = data.data.url;
+                                showDownload();
+                                showToast('✅ Image uploaded and QR code generated!');
+                            } else {
+                                alert("Image upload failed: " + (data.error ? data.error.message : "Unknown error."));
+                            }
+                        } else {
+                            alert("Image upload failed. Server responded with status: " + xhr.status);
+                        }
+                    };
+                    xhr.onerror = () => {
+                        progressBar.style.display = 'none';
+                        alert("Upload failed. Check your internet connection or API key.");
+                    };
+                    xhr.send(formData);
+                }
+            } else if (text) {
+                qr.value = text;
+                showDownload();
+                showToast('✅ QR code generated from text!');
+            } else {
+                alert('Please enter text, URL, or choose an image to generate a QR code.');
+            }
+        }
+
+        function showDownload() {
+            const dataURL = qrCanvas.toDataURL('image/png');
+            downloadLink.href = dataURL;
+            downloadLink.style.display = 'inline-block';
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.className = 'toast-message';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function decodeQR() {
+            const file = document.getElementById('qr-scan-input').files[0];
+            const decodedOutput = document.getElementById('decoded-output');
+            const scanImg = document.getElementById('scan-image');
+            const warning = document.getElementById('warning');
+
+            decodedOutput.textContent = '';
+            scanImg.style.display = 'none';
+            warning.textContent = '';
+
+            if (!file) {
+                warning.textContent = 'Please select an image to scan.';
+                return;
+            }
+
+            const img = new Image();
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const code = jsQR(imageData.data, canvas.width, imageData.height);
+
+                    if (code) {
+                        const data = code.data;
+                        decodedOutput.textContent = data;
+
+                        if (data.startsWith('data:image/')) {
+                            scanImg.src = data;
+                            scanImg.style.display = 'block';
+                            decodedOutput.innerHTML += '<br><em>(Decoded data is an embedded image, displayed below)</em>';
+                        } else if (data.startsWith('http://') || data.startsWith('https://')) {
+                            decodedOutput.innerHTML += `<br><a href="${data}" target="_blank">Open Link</a>`;
+                        } else if (data.startsWith('upi:')) {
+                            decodedOutput.innerHTML += `<br><strong>UPI Link:</strong> <a href="${data}" target="_blank">${data}</a>`;
+                        }
+                        showToast('✅ QR code decoded successfully!');
+                    } else {
+                        warning.textContent = 'No QR code found in the image.';
+                    }
+                };
+                img.onerror = () => {
+                    warning.textContent = 'Could not load image. Please ensure it is a valid image file.';
+                };
+                img.src = e.target.result;
+            };
+            reader.onerror = () => {
+                warning.textContent = 'Error reading the file.';
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>

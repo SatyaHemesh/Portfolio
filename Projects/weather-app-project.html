@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Weather App</title>
+
+    <!-- Google Fonts for better styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Alkatra&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Domine&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya&family=Domine&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* All CSS from style.css is merged here */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: rgb(84, 157, 216); /* Original background color */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333; /* Default text color */
+        }
+
+        .heading {
+            background-color: #000000;
+            color: white;
+            padding: 20px;
+            font-family: 'Domine', serif;
+            display: flex; /* Use flex for logo and text alignment */
+            flex-direction: column; /* Stack logo and text */
+            align-items: center; /* Center items horizontally */
+            justify-content: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+            /* display: block; margin-left: auto; margin-right: auto; are handled by flex */
+        }
+
+        .container {
+            margin: 10px auto;
+            width: 90%; /* Make it more responsive */
+            max-width: 500px; /* Max width for larger screens */
+            background-color: #ffffff; /* Add a background to the main container */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .date-container {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .container1 p {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .container1 input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 20px); /* Adjust for padding */
+            max-width: 300px; /* Limit input width */
+        }
+
+        .button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000000;
+            color: white;
+            border: none;
+            margin-top: 15px; /* Increased margin-top */
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button button:hover {
+            background-color: #333333; /* Darker on hover */
+        }
+
+        #result {
+            margin-top: 25px; /* Increased margin-top */
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            text-align: left;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+        }
+
+        #result h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #000000; /* Darker color for city name */
+        }
+
+        #result h4 {
+            margin-bottom: 8px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .footer {
+            margin-top: 40px; /* Adjusted margin-top */
+            background-color: #000000;
+            color: white;
+            padding: 20px;
+            font-family: 'Domine', serif;
+            width: 100%; /* Ensure footer spans full width */
+        }
+
+        /* Chart Canvas Styling (removed as graph is removed) */
+        /* #weatherChart {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        } */
+
+        #message-box {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #loading-indicator {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #007bff; /* Blue for loading message */
+            display: none; /* Hidden by default */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            .container1 input {
+                width: calc(100% - 10px); /* Adjust for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="heading">
+            <!-- Placeholder for your cloudy.png. If you have the image, place it in the same folder as this HTML file. -->
+            <img src="https://placehold.co/100x100/000000/FFFFFF?text=Weather" alt="Weather Logo" class="logo" width="100" height="100"/>
+            <h2 class="heading">Weather Application</h2>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        
+        <!-- Section to Display Current Date -->
+        <div class="date-container">
+            <p id="current-date"></p>  <!-- JavaScript will update this dynamically -->
+        </div>
+
+        <!-- Input Section for City Name -->
+        <div class="container1">
+            <p>Enter the city name:</p>
+            <input type="text" id="city" placeholder="Enter city name">
+        </div>
+
+        <!-- Button to Fetch Weather Data -->
+        <div class="button">
+            <button id="btn">Get Weather</button>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading-indicator" style="display: none;">Loading weather data...</div>
+
+        <!-- Result Section to Display Weather Data -->
+        <div id="result"></div>
+
+        <!-- Canvas for Chart.js (Removed) -->
+        <!-- <canvas id="weatherChart"></canvas> -->
+
+        <!-- Message box for errors/info -->
+        <div id="message-box"></div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <span> R.Satya Hemesh </span>
+    </footer>
+
+    <script>
+        // JavaScript to Display the Current Date
+        document.addEventListener("DOMContentLoaded", () => {
+            let today = new Date();
+            let formattedDate = today.toDateString();
+            document.getElementById("current-date").innerText = "Today's Date: " + formattedDate;
+        });
+
+        // 🔹 Select the button element from HTML by its ID
+        const btn = document.getElementById("btn");
+        const messageBox = document.getElementById("message-box");
+        const loadingIndicator = document.getElementById("loading-indicator");
+        // let myChartInstance; // Removed as graph is no longer needed
+
+        // 🔹 Add an event listener to the button to trigger weather fetching when clicked
+        btn.addEventListener("click", async () => {
+            messageBox.textContent = ""; // Clear previous messages
+            document.getElementById("result").innerHTML = ""; // Clear previous results
+            // if (myChartInstance) { myChartInstance.destroy(); } // Removed
+            loadingIndicator.style.display = 'block'; // Show loading indicator
+
+            const city = document.getElementById("city").value.trim(); // Get city name entered by the user
+            
+            if (!city) {
+                messageBox.textContent = "Please enter a city name.";
+                loadingIndicator.style.display = 'none'; // Hide loading indicator
+                return;
+            }
+
+            const apiKey = "171e009cae7e126fcbcec49c3a5cee6a"; // Your OpenWeatherMap API Key
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            try {
+                // Fetch current weather data
+                const weatherResponse = await fetch(weatherUrl);
+                const weatherData = await weatherResponse.json().catch(() => null);
+
+                if (!weatherResponse.ok) {
+                    let errorMessage = "Error fetching current weather data.";
+                    if (weatherResponse.status === 401) {
+                        errorMessage = "Error: Unauthorized. Please check your OpenWeatherMap API key. It might be incorrect or not yet activated. See https://openweathermap.org/faq#error401 for more info.";
+                    } else if (weatherData && weatherData.message) {
+                        errorMessage = `Error: ${weatherData.message}`;
+                    } else {
+                        errorMessage = `Error: ${weatherResponse.status} ${weatherResponse.statusText}`;
+                    }
+                    messageBox.textContent = errorMessage;
+                    console.error("Current Weather API Response Error:", weatherResponse.status, weatherResponse.statusText, weatherData);
+                    return; // Stop execution if current weather failed
+                }
+
+                displayWeather(weatherData); // Display current weather
+                
+                // Forecast data fetching and graph display removed
+                // const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+                // const forecastResponse = await fetch(forecastUrl);
+                // const forecastData = await forecastResponse.json();
+
+                // if (forecastData.cod === "200" && forecastData.list && forecastData.list.length > 0) {
+                //     displayGraph(forecastData);
+                // } else {
+                //     messageBox.textContent = "Could not fetch forecast data or no forecast available for this city.";
+                //     if (myChartInstance) {
+                //         myChartInstance.destroy();
+                //     }
+                //     console.warn("Forecast API Warning:", forecastData);
+                // }
+
+            } catch (error) {
+                console.error("Error fetching weather:", error);
+                messageBox.textContent = "Error fetching weather data. Please check your internet connection and try again.";
+            } finally {
+                loadingIndicator.style.display = 'none'; // Always hide loading indicator
+            }
+        });
+
+        // 🔹 Function to display weather information dynamically in HTML
+        const displayWeather = (data) => {
+            const result = document.getElementById("result");
+            // Temperatures are already Celsius due to units=metric in API call
+            const tempC = Math.round(data.main.temp); 
+            const feelsLikeC = Math.round(data.main.feels_like);
+
+            result.innerHTML = `
+                <h2 style="font-family: 'Alkatra', serif;">Weather of ${data.name}, ${data.sys.country}</h2>
+                <h4>Temperature: ${tempC}°C</h4>
+                <h4>Feels like: ${feelsLikeC}°C</h4>
+                <h4>Humidity: ${data.main.humidity}%</h4>
+                <h4>Pressure: ${data.main.pressure} hPa</h4>
+                <h4>Wind speed: ${data.wind.speed} m/s</h4>
+                <h4>Wind direction: ${data.wind.deg} degrees</h4>
+                <h4>Condition: ${data.weather[0].description}</h4>
+            `;
+        };
+
+        // 🔹 Function to create and display a weather chart using Chart.js (Removed)
+        // const displayGraph = (forecastData) => {
+        //     const ctx = document.getElementById("weatherChart").getContext("2d");
+
+        //     if (myChartInstance) {
+        //         myChartInstance.destroy();
+        //     }
+
+        //     const labels = [];
+        //     const temperatures = [];
+
+        //     if (!forecastData.list || !Array.isArray(forecastData.list) || forecastData.list.length === 0) {
+        //         messageBox.textContent = "No forecast data available to display graph.";
+        //         return;
+        //     }
+
+        //     const uniqueDates = new Set();
+        //     for (const item of forecastData.list) {
+        //         if (item && item.main && item.dt) {
+        //             const date = new Date(item.dt * 1000);
+        //             const dateString = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+        //             if (!uniqueDates.has(dateString)) {
+        //                 uniqueDates.add(dateString);
+        //                 labels.push(dateString);
+        //                 temperatures.push(Math.round(item.main.temp));
+        //             }
+        //             if (uniqueDates.size >= 5) {
+        //                 break;
+        //             }
+        //         }
+        //     }
+
+        //     if (labels.length > 0) {
+        //         myChartInstance = new Chart(ctx, {
+        //             type: "line",
+        //             data: {
+        //                 labels: labels,
+        //                 datasets: [
+        //                     {
+        //                         label: "Temperature (°C)",
+        //                         data: temperatures,
+        //                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        //                         borderColor: 'rgba(75, 192, 192, 1)',
+        //                         borderWidth: 2,
+        //                         tension: 0.4,
+        //                         fill: true,
+        //                     },
+        //                 ],
+        //             },
+        //             options: {
+        //                 responsive: true,
+        //                 maintainAspectRatio: false,
+        //                 scales: {
+        //                     y: {
+        //                         beginAtZero: false,
+        //                         title: {
+        //                             display: true,
+        //                             text: 'Temperature (°C)'
+        //                         }
+        //                     },
+        //                     x: {
+        //                         title: {
+        //                             display: true,
+        //                             text: 'Date'
+        //                         }
+        //                     }
+        //                 },
+        //                 plugins: {
+        //                     legend: {
+        //                         display: true,
+        //                         position: 'top',
+        //                     },
+        //                     title: {
+        //                         display: true,
+        //                         text: '5-Day Temperature Forecast'
+        //                     }
+        //                 }
+        //             },
+        //         });
+        //     } else {
+        //         messageBox.textContent = "No sufficient forecast data to draw graph.";
+        //     }
+        // };
+    </script>
+</body>
+</html>
